@@ -1,0 +1,40 @@
+.view{
+    flex: 50%;
+    background-color: #e0e1dd;
+
+}
+
+.memo{
+    border: solid;
+    border-radius: 5px;
+    border-color: #415a77;
+    margin: 10px;
+    color: #01161E;
+    margin-right: 100px;
+}
+.btn{
+    float: right;
+    margin-right: 10px;
+    background-color: #e0e1dd;
+    border-color: #415a77;
+    font-size: 15px;
+    margin-bottom:1px;
+    border: none;
+}
+.top{
+    text-align: left;
+    margin-left: 10px;
+    border-style: solid;
+    border-width: 0 0 2px;
+    border-color: #415a77;
+}
+.body{
+    text-align: left;
+    margin-left: 10px;
+    white-space: pre-wrap;
+}
+.date{
+    text-align: right;
+    margin-right: 10px;
+    font-size: 14px;
+}
