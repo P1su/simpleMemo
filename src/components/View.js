@@ -4,20 +4,23 @@ import styles from './View.module.css'
 import { MdDeleteOutline } from "react-icons/md";
 
 function Memo(props){
-    const [state, setState] = useState(true)
-    //console.log(props._key)
 
     const handleDelete=()=>{
-       // console.log(props._key)
+        console.log('눌림')
 
-        for(const key in localStorage){
-            if(key === props._key){
-                alert('삭제')
-                localStorage.removeItem(key)
+        for(let i = 0 ; i < props.memoList.length ; i++){
+            console.log(localStorage.key(i) )
+            console.log(props.memoList[i]._date)
+            
+            if(localStorage.key(i) === props.memoList[i]._date){
+                console.log(localStorage.key(i) == props.memoList[i]._date)
+                alert('삭제!');
+                localStorage.removeItem(localStorage.key(i));
 
-                const flag = false
-                setState(flag)
-    
+                props.memoList.splice(i,1);
+                const newList = [...props.memoList];
+                props.setMemoList(newList);
+                console.log(newList)
             }
         }
 
@@ -26,7 +29,7 @@ function Memo(props){
     }
 
     return(
-        <article key = {props._key} className ={styles.memo} >
+        <article key = {1} className ={styles.memo} >
                 <p className={styles.top}>{props.title}    
                 <button  className={styles.btn} onClick={()=>handleDelete()}  >{<MdDeleteOutline style={{ size:20, color:"#415a77"}}/>}
                 </button></p>
@@ -44,20 +47,26 @@ function View(props){
     let lis = []
     
     for(let i = 0 ;  i < localStorage.length ; i++){
+
         const key = localStorage.key(i);
         const title = JSON.parse(localStorage.getItem(key))._title
         const body = JSON.parse(localStorage.getItem(key))._body
 
         lis.push(
-
-            <Memo _key = {key} title = {title} body={body}></Memo>
+            
+            <Memo key = {key} title = {title} body={body}
+            memoList = {props.memoList} setMemoList={props.setMemoList}
+            ></Memo>
 
             
         )
     }
 
-    lis.sort((a,b) => b.key - a.key);
-    
+    lis.sort(function (a,b){
+        console.log(b.key)
+        console.log(a.key)
+        return b.key-a.key;
+    });
 
 
     return(

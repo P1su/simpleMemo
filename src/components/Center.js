@@ -8,14 +8,28 @@ import View from './View'
 const memoList = [];
 
 function Center(){
+    let lis = [];
+    useEffect(()=>{
+        
+        for(let i = 0 ;  i < localStorage.length ; i++){
 
-    const [memo, setMemo] = useState([]);
+            const key = localStorage.key(i);
+            lis.push(JSON.parse(localStorage.getItem(key)))
+          
+        }
+        
+    })
+
     
-    console.log(memo);
+    const [memoList, setMemoList] = useState(lis)
+    
+   // console.log(memo);
+    console.log("list는")
+    console.log(memoList)
     return(
         <div className={styles.center}>
-            <Create memo = {memo} setMemo = {setMemo} memoList={memoList}/>
-            <View memo = {memo} memoList = {memoList}/>            
+            <Create  memoList={memoList} setMemoList={setMemoList}/>
+            <View memoList={memoList} setMemoList={setMemoList}/>            
         </div>
         
     );

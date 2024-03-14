@@ -6,31 +6,35 @@ import styles from './Create.module.css'
 import { FaCheck } from "react-icons/fa6";
 
 function Create(props){
+    
+
+
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
-   // const [id, setId] = useState(0);
-   // const [nxtId, setNxtId] = useState(1);
-
+  //  const [id, setId] = useState();
+    
     const currentDate = dayjs();
     const formattedDate = currentDate.format('YYYY-MM-DD HH:mm:ss');
-    
+  //  console.log(id);
     return(
         
         <div className= {styles.create}>
 
             <form className={styles.form} onSubmit={event =>{
                 event.preventDefault();
-                const newMemo ={ _title: title, _body: body, _state: true}; 
+
+                const newMemo ={ _title: title, _body: body, _date:formattedDate};
                 props.memoList.push(newMemo);
+                const newList = [...props.memoList];
                 
-                props.setMemo(newMemo);
+          //     props.setMemo(newMemo);
                 setTitle("");
                 setBody("");
-             //   setId(id+1);
-               // setNxtId(nxtId+1);
+                props.setMemoList(newList);
 
                 localStorage.setItem(formattedDate, JSON.stringify(newMemo));
-                
+              ///  const newId = id+1;
+               // setId(newId);
             }}>
                 <p>
                     <input type='text' placeholder='제목을 입력하세요' value = {title} onChange={ e=>setTitle(e.target.value)}
